@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    var data = [
+        {
+            name: '王杰',
+            num: 10,
+        },
+        {
+            name: '老管',
+            num: 100,
+        },
+        {
+            name: '小李',
+            num: 10,
+        },
+        {
+            name: '二彪',
+            num: 100,
+        },
+        {
+            name: '苗帅',
+            num: 10,
+        },
+        {
+            name: '老宋',
+            num: 100,
+        },
+    ];
+
+
+
+
+
+    var canvas = document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    canvas.width = 500;
+    canvas.height = 500;
+    canvas.style.border = '1px solid #ccc';
+    document.body.appendChild(canvas);
+
+    // 移动画布
+    ctx.translate(50, 450);
+
+    // 比例
+    var mangin = 400 / (data.length + 1)
+
+
+    // 求出最大值
+    let maxNum = JSON.parse(JSON.stringify(data)).sort(function (a, b) {
+        return b.num - a.num;
+    })[0].num;
+
+
+    var colorArr = data.map(function(){
+        return  fn();
+    })
+    // 监听事件
+    canvas.addEventListener('mousemove', function (e) {
+        ctx.clearRect(-50, -450, 500, 500);
+        a(e);
+    });
+
+
+    a();
+    function a(e) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(0, -400);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(400, 0);
+        ctx.stroke();
+        ctx.closePath();
+        ctx.restore();
+
+
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        for (var i = 50; i <= 400; i += 50) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(-5, -i);
+            ctx.lineTo(5, -i);
+            ctx.fillText(Math.floor((i / 400 * maxNum)), -15, -i);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        for (var i = 0; i < data.length; i++) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.fillStyle = colorArr[i];
+            ctx.rect(mangin * (i + 1), 0, 20, -(data[i].num / maxNum * 400));
+            if (e && ctx.isPointInPath(e.offsetX, e.offsetY)) {
+                ctx.fillStyle = 'pink';
+                ctx.fillText(data[i].num, mangin * i + 68, -data[i].num / maxNum * 400 - 10)
+            }
+            ctx.fillText(data[i].name, mangin * (i + 1) +10, 15);
+            ctx.fill();
+            ctx.closePath();
+            ctx.restore();
+        }
+
+    }
+
+    function fn() {
+        return `rgba(${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},1)`
+    }
+
+</script>
+    
+
+</html>
