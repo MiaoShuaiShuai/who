@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    var canvas = document.createElement('canvas');
+    canvas.width = 500;
+    canvas.height = 500;
+    canvas.style.border = '2px solid #ccc';
+    document.body.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+    // for (var i = 50; i < 500; i += 50) {
+    //     ctx.beginPath();
+    //     ctx.moveTo(0, i);
+    //     ctx.lineTo(500, i);
+    //     ctx.stroke();
+
+    //     ctx.beginPath();
+    //     ctx.moveTo(i, 0);
+    //     ctx.lineTo(i, 500);
+    //     ctx.stroke();
+    // }
+
+    //  头
+    ctx.beginPath();
+    ctx.fillStyle = 'yellow';
+    ctx.arc(250, 250, 150, 0, Math.PI * 360, true);
+    ctx.fill();
+
+    // 眼白
+    ctx.beginPath();
+    ctx.fillStyle = '#fff';
+    ctx.arc(300, 170, 15, 0, Math.PI * 360, true);
+    ctx.fill();
+
+    // 眼黑
+    ctx.beginPath();
+    ctx.fillStyle = '#000';
+    ctx.arc(305, 175, 8, 0, Math.PI * 360, true);
+    ctx.fill();
+
+    // 刘海
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(200, 145);
+    ctx.lineTo(200, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(215, 145);
+    ctx.lineTo(215, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(230, 145);
+    ctx.lineTo(230, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(245, 145);
+    ctx.lineTo(245, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(260, 145);
+    ctx.lineTo(260, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(275, 145);
+    ctx.lineTo(275, 100);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#ccc';
+    ctx.lineWidth = '5';
+    ctx.moveTo(290, 145);
+    ctx.lineTo(290, 100);
+    ctx.stroke();
+
+    // 嘴
+    ctx.moveTo(250, 250);
+    ctx.lineTo(400, 220);
+    ctx.lineTo(400, 250);
+    ctx.fillStyle = '#fff';
+    ctx.closePath();
+    ctx.fill();
+</script>
+
+
+<script>
+
+    var data = [
+        { value: 335, name: '直接访问', color: "rgb(213, 58, 53)" },
+        { value: 310, name: '邮件营销', color: "rgb(51, 75, 92)" },
+        { value: 234, name: '联盟广告', color: "rgb(106, 176, 184)" },
+        { value: 135, name: '视频广告', color: "rgb(233, 143, 111)" },
+        { value: 1548, name: '搜索引擎', color: "rgb(145, 199, 174)" }
+    ]
+
+
+    var value = [335, 310, 234, 235, 1548]
+    var color = ['rgb(213, 58, 53)', 'rgb(51, 75, 92)', 'rgb(106, 176, 184)', 'rgb(233, 143, 111)', 'rgb(145, 199, 174)']
+    var deg = Math.PI / 180;
+
+
+    var sum = value.reduce(function (pre, cur) {
+        return pre + cur;
+    });
+
+
+    var degArr = value.map(function (item) {
+        return item / sum * 360;
+    });
+
+
+    var canvas = document.createElement('canvas');
+    canvas.width = 500;
+    canvas.height = 500;
+    canvas.style.border = '2px solid #ccc';
+    document.body.appendChild(canvas);
+    var ctx = canvas.getContext('2d');
+
+
+    for (var i = 50; i < 500; i += 50) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(500, i);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, 500);
+        ctx.stroke();
+    }
+
+
+    var startDeg = 270;
+    for (var i = 0; i < degArr.length; i++) {
+        ctx.beginPath();
+        var endDeg = degArr[i];
+        ctx.fillStyle = color[i];
+        ctx.moveTo(250, 250)
+        ctx.arc(250, 250, 150, startDeg * deg, (startDeg + endDeg) * deg);
+        ctx.closePath();
+
+        ctx.fill();
+        startDeg += endDeg;
+    }
+
+    ctx.beginPath();
+    ctx.fillStyle = '#FFF';
+    ctx.arc(250, 250, 100, 0, Math.PI * 360, true);
+    ctx.fill();
+</script>
+
+</html>
